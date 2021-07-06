@@ -1,2 +1,1 @@
-release: python manage.py migrate --no-input
-web: gunicorn core.wsgi
+web: gunicorn hospital.wsgi --log-file -
