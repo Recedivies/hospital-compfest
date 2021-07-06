@@ -16,14 +16,14 @@ class ProfileForm(forms.ModelForm):
     model = Patient
     fields = ('age',)
 
-# creating form for admin dashboard to add doctors  
+# creating form for admin dashboard to add and update doctors  
 class DashForm(forms.ModelForm):
   class Meta:
     model = Doctor
-    fields = ('doc_id', 'name', 'description')
-
-# creating form for admin dashboard to update doctors         
-class UpdateForm(forms.ModelForm):
-  class Meta:
-    model = Doctor
     fields = ('name', 'description')
+
+# # creating form for admin dashboard to update doctors         
+# class UpdateForm(forms.ModelForm):
+#   class Meta:
+#     model = Doctor
+#     fields = ('name', 'description')

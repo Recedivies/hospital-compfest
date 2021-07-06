@@ -24,12 +24,12 @@
    <div class="container">
        <div class="row align-items-center regervation_content">
           
-              
                   <table class="table">
   
                       <thead>
                           <tr>
                               <th>Doctor Name</th>
+                              <th>Description</th>
                           </tr>
                       </thead>
                     
@@ -37,13 +37,11 @@
                          {% for appointment in appointments %}
                           <tr>
                               <td>{{appointment.doc_id}}</td>
+                              <td>{{appointment.doc_id.description}}</td>
                               <td>
                               <form method="POST" action="{% url 'patient:delete_appointment' appointment.pk %}">{% csrf_token %}
                               <button type="submit" class="btn btn-primary">Cancel Appointment</button>    
                               </form>
-                              </td>
-                              <td>
-                                  <a href="{%url 'patient:update_appointment' appointment.pk %}" class="secondary-content"><button type="submit" class="btn btn-primary">Edit</button></a>
                               </td>
                               
                           </tr>        

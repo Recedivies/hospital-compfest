@@ -3,7 +3,6 @@ from account.forms import (
   RegisterForm,
   ProfileForm,
   DashForm,
-  UpdateForm
 )
 from django.contrib.auth import (
   login,
@@ -97,14 +96,14 @@ def addDoc(request):
 # Update Doctor from admin site
 def updateDoc(request, pk=None):
   if (request.method == "POST"):
-    form = UpdateForm(request.POST, request.FILES)
+    form = DashForm(request.POST, request.FILES)
     if (form.is_valid()):
       d = Doctor.objects.get(pk=pk)
       d.name = form.cleaned_data['name']
       d.description = form.cleaned_data['description']
       d.save()
       return redirect('account:dashboard')
-  form = UpdateForm()
+  form = DashForm()
   return render(request, "account/updateDoc.html", {
     "form": form
   })
