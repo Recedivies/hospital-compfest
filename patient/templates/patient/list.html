@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<section class="our_ability section_padding">
+  <section class="review_part">
+      <div class="container">
+          <div class="row justify-content-center">
+              
+              <div class="col-lg-10">
+                  <div class="client_review_part owl-carousel">
+                     
+                      <div class="client_review_single">
+                          <img src="{% static 'img/Quote.png' %}" class="Quote" alt="quote">  
+                        
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+  </section>
+  <section class="regervation_part padding_bottom">
+   <div class="container">
+       <div class="row align-items-center regervation_content">
+          
+              
+                  <table class="table">
+  
+                      <thead>
+                          <tr>
+                              <th>Doctor Name</th>
+                          </tr>
+                      </thead>
+                    
+                      <tbody>
+                         {% for appointment in appointments %}
+                          <tr>
+                              <td>{{appointment.doc_id}}</td>
+                              <td>
+                              <form method="POST" action="{% url 'patient:delete_appointment' appointment.pk %}">{% csrf_token %}
+                              <button type="submit" class="btn btn-primary">Cancel Appointment</button>    
+                              </form>
+                              </td>
+                              <td>
+                                  <a href="{%url 'patient:update_appointment' appointment.pk %}" class="secondary-content"><button type="submit" class="btn btn-primary">Edit</button></a>
+                              </td>
+                              
+                          </tr>        
+                          {% endfor %}
+                      </tbody> 
+                  </table>   
+              
+           </div>
+       </div>
+   </div>
+</section>
+{% endblock content %}
+  

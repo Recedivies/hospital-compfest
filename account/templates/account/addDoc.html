@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="feature_part single_feature_part">
+  <div class="container">
+      <div class="row">
+          <div class="col-xl-4 col-md-4 align-self-center">
+              <div class="single_feature_text ">
+              </div>
+          </div>
+          <div class="col-lg-8 col-md-8">
+              <div class="feature_item">
+                  <div class="row">
+                      <div class="col-lg-6 col-sm-6">
+                              <div class="single_feature_part">
+                                  <form method="POST" enctype="multipart/form-data">
+                                      {% csrf_token %}
+                                      {{form.as_p}}
+                                      <button type="submit" class="btn btn-primary">Add Doctor</button>
+                                  </form>
+                              </div>
+                          </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>  
+{% endblock content %}
+  

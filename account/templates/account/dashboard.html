@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="our_ability section_padding">
+  <section class="review_part">
+      <div class="container">
+          <div class="row justify-content-center">
+              
+              <div class="col-lg-10">
+                  <div class="client_review_part owl-carousel">
+                     
+                      <div class="client_review_single">
+                          <img src="{% static 'img/Quote.png' %}" class="Quote" alt="quote">  
+                        
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+  </section>
+  <section class="regervation_part padding_bottom">
+   <div class="container">
+       <div class="row align-items-center regervation_content">
+        {% if doctor %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            {% for d in doctor %}
+            <tr>
+              <td>{{d.name}}</td>
+              <td>{{d.description}}</td>
+              <td>
+                <a href="{%url 'account:updateDoc' d.pk%}">
+                <button type="submit" class="btn btn-primary">Update</button></a>
+                </td>
+              <td>
+                <a href="{%url 'account:deleteDoc' d.pk%}">
+                <button type="submit" class="btn btn-primary">Delete</button></a>
+                </td>
+        
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div class="container">
+          <div class="row">
+            <div class="card-title">
+              <h1 class="card-body">No Doctors !</h1>
+            </div>
+          </div>
+        </div>
+           </div>
+       </div>
+       {% endif %}
+      </section>
+{% endblock content %}
