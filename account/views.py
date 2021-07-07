@@ -35,7 +35,8 @@ def register_user(request):
       return redirect('account:logged_in')
     return render(request, 'account/register.html', {
       'error': "Username/Email already in use. Please try another username/email!",
-      "form": form
+      "form": form,
+      "formProfile": formProfile
     })
   form = RegisterForm()
   formProfile = ProfileForm()
@@ -101,19 +102,17 @@ def addDoc(request):
 # Update Doctor from admin site
 def updateDoc(request, pk=None):
   if (request.method == "POST"):
-    form = DashForm(request.POST, request.FILES)
+    d = Doctor.objects.get(pk=pk)
+    form = DashForm(request.POST, instance=d)
     if (form.is_valid()):
-      d = Doctor.objects.get(pk=pk)
-      d.name = form.cleaned_data['name']
-      d.description = form.cleaned_data['description']
-      d.save()
+      form.save()
       return redirect('account:dashboard')
-    return render(request, "account/addDoc.html", {
-      "form": form
+    return render(request, "account/updateDoc.html", {
+      "form": form,
     })
   form = DashForm()
   return render(request, "account/updateDoc.html", {
-    "form": form
+    "form": form,
   })
 
 @login_required(login_url='account:patient_login')
