@@ -17,15 +17,12 @@
                             {% csrf_token %}
                             <h2>Login</h2>
                             <br>
-                            <br>
                             {% if error %}
-                                <div class="alert alert-danger" role="alert">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Error:</span>
-                                {{error}}
-                                </div>
+                              <div class="alert alert-danger" role="alert">
+                              <span class="sr-only">Error:</span>
+                              {{error}}
+                              </div>
                             {% endif %}
-                              
                             <form id="form" method="post" action="/account/login/">
                               {% csrf_token %}
                               Username: <input type="text" name="username" value="" size="20" />

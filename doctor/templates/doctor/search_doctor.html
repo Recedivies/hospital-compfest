@@ -2,44 +2,60 @@
 {% load static %}
 
 {% block content %}
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+  {% endfor %}
+{% endif %}
 <section class="doctor_part section_padding single_doctor_part">
   <div class="container">
-  {% if messages %}
-    {% for message in messages %}
-      {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
-    {% endfor %}
-  {% endif %}
-
-   {% if doctors %}
-      <div class="row">
-        {% for d in doctors %}
-          <div class="col-sm-6 col-lg-3">
-              <div class="single_blog_item">
-                  <div class="single_blog_img">
-                       <a href="{% url 'patient:create_appointment' d.pk%}"><h5>Make Appointment</h5></a>
-                   </div>
-                  </div>
-                  <div class="single_text">
-                      <div class="single_blog_text">
-                          <h3>{{d.name}}</h3>
-                          <p>{{d.description}}</p>
+    {% if doctors %}
+    <div class="row">
+      {% for d in doctors %}
+        <div class="col-sm-6 col-lg-3">
+          <div class="single_blog_item">
+              <div class="single_text">
+                  <div class="single_blog_text">
+                      <h3>{{d.name}}</h3>
+                      <p>{{d.description}}</p>
+                      <div class="single_blog_img">
+                        <div class="social_icon">
+                          <a href="{% url 'patient:create_appointment' d.pk%}"><h5>Make Appointment</h5></a>
+                        </div>
                       </div>
                   </div>
               </div>
           </div>
-          {% endfor %}
-                  </div>
-                  {% else %}
-                  <div class="row justify-content-center">
-                    <div class="col-xl-8">
-                       
-                        <div class="section_tittle text-center">
-                            <h2>Sorry! No Doctors found</h2>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-              </div>
+        </div>
+        {% endfor %}
+      </div>
+    <!-- <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in doctors %}
+          <tr>
+            <td>{{ d.name }}</td>
+            <td>{{ d.description }}</td>
+            <td><a href="{% url 'patient:create_appointment' d.pk %}"><h6>Make Appointment</h6></a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table> -->
+    {% else %}
+    <div class="row justify-content-center">
+      <div class="col-xl-8">
+        <div class="section_tittle text-center">
+          <h2>Sorry! No Doctors found</h2>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  </div>
 </section>
 {% endblock content %}
   

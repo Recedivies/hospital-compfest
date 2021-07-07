@@ -13,7 +13,7 @@ def create_appointment(request, pk=None):
   if (request.method == "POST"):
     p = Patient.objects.get(user_id=request.user.id)
     a = Appointment(patient_id_id=p.id)
-    d = Doctor.objects.get(doc_id=pk)
+    d = Doctor.objects.get(pk=pk)
     if (Appointment.objects.filter(doc_id=pk).exists()):
       messages.info(request, f"Doctor with name {d.name} is fully Registered")
       return redirect('doctor:list_doc')      

@@ -21,9 +21,3 @@ class DashForm(forms.ModelForm):
   class Meta:
     model = Doctor
     fields = ('name', 'description')
-
-# # creating form for admin dashboard to update doctors         
-# class UpdateForm(forms.ModelForm):
-#   class Meta:
-#     model = Doctor
-#     fields = ('name', 'description')

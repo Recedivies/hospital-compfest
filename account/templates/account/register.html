@@ -16,28 +16,23 @@
            <div class="col-lg-7 col-md-6">
                <div class="regervation_part_iner">
                    <form method="POST" enctype="multipart/form-data">
-                  
-                       <div>
-                          {% csrf_token %}
-                          <h2>Sign Up</h2>
-                          {% if error %}
-                             <div class="alert alert-danger" role="alert">
-                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                             <span class="sr-only">Error:</span>
-                             {{error}}
-                             </div>
-                          {% endif %}
+                        {% csrf_token %}
+                        <h2>Sign Up</h2>
+                        {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                            <span class="sr-only">Error:</span>
+                            {{error}}
+                            </div>
+                        {% endif %}
                       
-                          {{form.as_p}}
-                          
-                          {{formProfile.as_p}}
+                        {{form.as_p}}  
+                        {{formProfile.as_p}}
                         <br>
                         <br>
                         <button type="submit" class="regerv_btn_iner">Register</button>
                         <br>
                         <br>
                         <p>Already Registered? <a href="{% url 'account:patient_login' %}">Click here</a> to login.</p>
-                       </div>
                    </form>
                </div>
            </div>

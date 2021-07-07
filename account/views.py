@@ -33,14 +33,16 @@ def register_user(request):
       user = authenticate(username=username, email=email, password=password)
       login(request, user)
       return redirect('account:logged_in')
-    else:
-      return render(request, 'account/register.html', {
-        'error': "Username/Email already in use. Please try another username/email!"
-      })
-  else:
-    form = RegisterForm()
-    formProfile = ProfileForm()
-    return render(request, "account/register.html", {"form":form,"formProfile":formProfile})
+    return render(request, 'account/register.html', {
+      'error': "Username/Email already in use. Please try another username/email!",
+      "form": form
+    })
+  form = RegisterForm()
+  formProfile = ProfileForm()
+  return render(request, "account/register.html", {
+    "form": form,
+    "formProfile": formProfile
+  })
 
 # User Login
 def patient_login(request):
@@ -50,7 +52,7 @@ def patient_login(request):
     user = auth.authenticate(request, username=username, password=password)
     if (user is not None):
       auth.login(request, user)
-      return redirect('account:dashboard')
+      return redirect('account:logged_in')
     return render(request, 'account/login.html', {
       'error': "Invalid Username or Password"
     })
@@ -79,13 +81,16 @@ def dashboard(request):
 @admin_only
 # Add Doctor from admin site
 def addDoc(request):
-  form = DashForm(request.POST, request.FILES)
-  if (form.is_valid()):
-    doc_id = form.cleaned_data.get('doc_id')
-    name = form.cleaned_data.get('name')
-    description = form.cleaned_data.get('description')
-    form.save()
-    return redirect('account:dashboard')
+  if (request.method == "POST"):
+    form = DashForm(request.POST, request.FILES)
+    if (form.is_valid()):
+      name = form.cleaned_data.get('name')
+      description = form.cleaned_data.get('description')
+      form.save()
+      return redirect('account:dashboard')
+    return render(request, "account/addDoc.html", {
+      "form": form
+    })
   form = DashForm()
   return render(request, "account/addDoc.html", {
     "form": form
@@ -103,6 +108,9 @@ def updateDoc(request, pk=None):
       d.description = form.cleaned_data['description']
       d.save()
       return redirect('account:dashboard')
+    return render(request, "account/addDoc.html", {
+      "form": form
+    })
   form = DashForm()
   return render(request, "account/updateDoc.html", {
     "form": form
@@ -112,6 +120,9 @@ def updateDoc(request, pk=None):
 @admin_only
 # Delete Doctor from admin site
 def deleteDoc(request, pk=None):
-  d = Doctor.objects.get(pk=pk)
-  d.delete()
+  try:
+    d = Doctor.objects.get(pk=pk)
+    d.delete()
+  except d.DoesNotExist:
+    return redirect('account:dashboard')
   return redirect('account:dashboard')

@@ -1,4 +1,6 @@
 /venv
 /media
 __pycache__
-/erd.dot
+/.vscode
+/static
+erd.dot
