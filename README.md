@@ -6,12 +6,12 @@
 </div>
 
 ## Motivation behind this project and features:
-This project create a Hospital Information System website as a Selection Task for Software Engineering Academy COMPFEST.
+This project was to create a Hospital Information System website as a Selection Task for Software Engineering Academy COMPFEST.
 
-### Description:
-Users can register and login with their username and password to act as a patient. if the user is logged in as super user then it act as an administrator. Admin can create/update/delete doctor appointments. 
+## Description:
+Users can register and login with their username and password to act as a patient. In order to apply/cancel doctor appointment, authentication and authorization is required. Patients cannot apply for an appointment with a fully booked registrant. 
 
-In order to apply/cancel doctor appointment, authentication and authorization is required. Patients cannot apply for an appointment with a fully booked registrant.
+If the user is logged in as super user then it act as an administrator. Admin can create/update/delete doctor appointments. 
 
 ### Used Frameworks, libraries:
 - Python, Django
