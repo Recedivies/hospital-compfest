@@ -6,17 +6,15 @@
 </div>
 
 ## Motivation behind this project and features:
-This project was inspired by [Dicoding Final Project Backend API](https://dicoding.com).
-Initially I was finished the scholarship Dicoding Indonesia class of "Belajar Membuat Aplikasi Backend untuk Pemula". I got 5 stars for my final grad>
+This project create a Hospital Information System website as a Selection Task for Software Engineering Academy COMPFEST.
 
 ### Description:
-**REST API** with CRUD operations on books objects.
-Users can send requests to API to view books anonymously. 
+Users can register and login with their username and password to act as a patient. if the user is logged in as super user then it act as an administrator. Admin can create/update/delete doctor appointments. 
 
-### Used Frameworks, libraries, tools:
-- Django
+In order to apply/cancel doctor appointment, authentication and authorization is required. Patients cannot apply for an appointment with a fully booked registrant.
 
-**Json Web Token Authentication** is 'rest_framework_simplejwt' package, which provides JWT implementation including DRF views for obtaining and refr>
+### Used Frameworks, libraries:
+- Python, Django
 
 ### Tools:  
 - Visual Studio Code, Heroku
@@ -25,7 +23,7 @@ Production database is Heroku Postgres.
 Locally I used default SQLite database.
 
 ### Database schema:
-ERD diagram including Django's base entities and manually created **Book** entity.
+ERD diagram including Django's base entities and manually created **Doctor**, **Patient**, and **Appointment** entity.
 ![Entity Relationship Diagram](docs/erd.png)
 
 #### Doctor Model:
@@ -36,13 +34,12 @@ ERD diagram including Django's base entities and manually created **Book** entit
 To support many-to-many relationship, we need create a third table (known as a juction table), say Appointment, where each represents an appointment of a particular doctor. For the Appointment table, the primary key consists of two columns: doc_id and patient_id, the uniquely identify each row. The column doc_id and patient_id in Appointment table are used to reference Patient and Doctor tables, hence, they are also the foreign key in the Appointment table.
 
 ### Deployment: 
-This repository has been deployed to Heroku. You can visit [here](https://books-api-dicoding.herokuapp.com/)
+This repository has been deployed to Heroku. You can visit [here](https://hospital-compfest.herokuapp.com/)
 #### Step to reproduce deployment:
 1. Create staticfiles folder and put any file into it.
-(Make sure you made an exception in .gitignore for this file. Mine is called temp.)
-2. Make sure there is Procfile is root directory with these 2 lines:
-``release: python manage.py migrate --no-input``
-``web: gunicorn core.wsgi``
+(Make sure you made an exception in .gitignore for this file.)
+2. Make sure there is Procfile is root directory with this line:
+``web: gunicorn hospital.wsgi --log-file -``
 3. Set `DEBUG = False`, add `django_heroku.settings(locals())` on the bottom of settings.py.
 Make sure your **requirements.txt** contains every needed package. You may want to update it with
 ``pip freeze > requirements.txt``.
@@ -56,7 +53,7 @@ You can Enable Automatic Deploys or Deploy Branch manually.
 ### Local development:
 Create new virtual environment, activate it and install dependencies.
 ```shell script
-pip3 -m venv venv
+python3 -m venv venv
 
 . venv/bin/activate
 
@@ -76,6 +73,9 @@ Run server and open your browser at `http://127.0.0.1:8000/`
 python manage.py runserver
 ```
 
-### Possible future content:
-- Permissions to access book (e.g only author can modify)
-- More Query endpoint(get book by other attributes)
+### Possible future content (outside of task's requirements):
+- Implement REST API with CRUD operations
+- Integrate Django Backend with React Frontend
+- Query endpoint
+- Using different database
+- Handle race condition
