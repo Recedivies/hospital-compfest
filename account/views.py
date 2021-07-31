@@ -14,6 +14,8 @@ from django.contrib.auth.models import User
 from doctor.models import Doctor
 from django.contrib.auth.decorators import login_required
 from account.decorators import admin_only
+from django.shortcuts import get_object_or_404
+from django.http import Http404
 
 # User Registration
 def register_user(request):
@@ -120,8 +122,7 @@ def updateDoc(request, pk=None):
 # Delete Doctor from admin site
 def deleteDoc(request, pk=None):
   try:
-    d = Doctor.objects.get(pk=pk)
-    d.delete()
-  except d.DoesNotExist:
+    doctor = Doctor.objects.get(pk=pk)
+    doctor.delete()
+  except Doctor.DoesNotExist:
     return redirect('account:dashboard')
-  return redirect('account:dashboard')
